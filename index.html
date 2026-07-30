@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="Мамедов Амаль — бренд-менеджер, дизайнер, маркетолог. Портфолио." />
   <title>Мамедов Амаль — Portfolio</title>
   <link rel="stylesheet" href="styles.css" />
@@ -237,9 +237,9 @@
   <div class="lightbox" id="lightbox" hidden>
     <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close">×</button>
     <button class="lightbox-nav prev" id="lightboxPrev" type="button" aria-label="Previous">‹</button>
-    <div class="lightbox-media">
-      <img id="lightboxImage" alt="" hidden />
-      <video id="lightboxVideo" controls playsinline hidden></video>
+    <div class="lightbox-media" id="lightboxMedia">
+      <img id="lightboxImage" alt="" hidden draggable="false" />
+      <video id="lightboxVideo" controls playsinline webkit-playsinline preload="metadata" hidden></video>
     </div>
     <p class="lightbox-caption" id="lightboxCaption"></p>
     <button class="lightbox-nav next" id="lightboxNext" type="button" aria-label="Next">›</button>

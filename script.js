@@ -279,8 +279,10 @@ function showMedia(src) {
     lightboxImage.hidden = true;
     lightboxImage.removeAttribute("src");
     lightboxVideo.hidden = false;
+    lightboxVideo.setAttribute("playsinline", "");
+    lightboxVideo.setAttribute("webkit-playsinline", "");
     lightboxVideo.src = src;
-    lightboxVideo.play().catch(() => {});
+    lightboxVideo.load();
   } else {
     stopVideo();
     lightboxVideo.hidden = true;
@@ -298,6 +300,8 @@ function openLightbox(key, index = 0) {
   updateCaption();
   lightbox.hidden = false;
   document.body.style.overflow = "hidden";
+  document.body.style.position = "fixed";
+  document.body.style.width = "100%";
 }
 
 function closeLightbox() {
@@ -308,6 +312,8 @@ function closeLightbox() {
   lightboxVideo.hidden = true;
   lightboxCaption.textContent = "";
   document.body.style.overflow = "";
+  document.body.style.position = "";
+  document.body.style.width = "";
 }
 
 function showSlide(step) {
@@ -333,17 +339,63 @@ nav.querySelectorAll("a").forEach((a) =>
 );
 
 document.getElementById("year").textContent = new Date().getFullYear();
-document.getElementById("lightboxClose").addEventListener("click", closeLightbox);
-document.getElementById("lightboxPrev").addEventListener("click", () => showSlide(-1));
-document.getElementById("lightboxNext").addEventListener("click", () => showSlide(1));
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) closeLightbox();
+
+const lightboxPrev = document.getElementById("lightboxPrev");
+const lightboxNext = document.getElementById("lightboxNext");
+const lightboxMedia = document.getElementById("lightboxMedia");
+
+lightboxPrev.addEventListener("click", (e) => {
+  e.stopPropagation();
+  showSlide(-1);
 });
+lightboxNext.addEventListener("click", (e) => {
+  e.stopPropagation();
+  showSlide(1);
+});
+document.getElementById("lightboxClose").addEventListener("click", (e) => {
+  e.stopPropagation();
+  closeLightbox();
+});
+
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox || e.target === lightboxMedia) closeLightbox();
+});
+
 document.addEventListener("keydown", (e) => {
   if (lightbox.hidden) return;
   if (e.key === "Escape") closeLightbox();
   if (e.key === "ArrowLeft") showSlide(-1);
   if (e.key === "ArrowRight") showSlide(1);
 });
+
+/* Swipe for iPhone / touch */
+let touchStartX = 0;
+let touchStartY = 0;
+let touchStartTime = 0;
+
+function onTouchStart(e) {
+  if (lightbox.hidden) return;
+  const t = e.changedTouches[0];
+  touchStartX = t.clientX;
+  touchStartY = t.clientY;
+  touchStartTime = Date.now();
+}
+
+function onTouchEnd(e) {
+  if (lightbox.hidden) return;
+  if (e.target && e.target.closest && e.target.closest("video")) return;
+  const t = e.changedTouches[0];
+  const dx = t.clientX - touchStartX;
+  const dy = t.clientY - touchStartY;
+  const dt = Date.now() - touchStartTime;
+  if (dt > 800) return;
+  if (Math.abs(dx) < 45) return;
+  if (Math.abs(dx) < Math.abs(dy) * 1.2) return;
+  if (dx < 0) showSlide(1);
+  else showSlide(-1);
+}
+
+lightbox.addEventListener("touchstart", onTouchStart, { passive: true });
+lightbox.addEventListener("touchend", onTouchEnd, { passive: true });
 
 applyLanguage(lang);
