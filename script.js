@@ -53,8 +53,7 @@ const translations = {
     work4_text:
       "Презентации, прайс-листы, программа лояльности и визуальная система.",
     exp_title: "ОПЫТ",
-    exp_present: "НАСТОЯЩЕЕ",
-    exp_more: "ТАКЖЕ",
+    exp_more: "ДОПОЛНИТЕЛЬНЫЙ ОПЫТ РАБОТЫ",
     job1_role: "Младший бренд-менеджер — АСТ",
     job1_text:
       "Полный цикл продвижения новых книг: ЦА, УТП, медиапланы в 1С, подрядчики, контент для сайта и маркетплейсов, реклама и контроль продаж.",
@@ -85,7 +84,6 @@ const translations = {
     proj3_title: "Контент для маркетплейсов",
     proj3_text:
       "Карточки книг и визуалы для АСТ на Wildberries — оформление новинок и рекламные материалы.",
-    footer_social: "СОЦИАЛЬНЫЕ СЕТИ",
     footer_contact: "КОНТАКТЫ ДЛЯ СВЯЗИ",
   },
   en: {
@@ -142,8 +140,7 @@ const translations = {
     work4_text:
       "Presentations, price lists, loyalty program and visual system.",
     exp_title: "EXPERIENCE",
-    exp_present: "PRESENT",
-    exp_more: "ALSO",
+    exp_more: "ADDITIONAL WORK EXPERIENCE",
     job1_role: "Junior Brand Manager — AST",
     job1_text:
       "Full-cycle promotion of new books: audience, UVP, media plans in 1C, vendors, content for site and marketplaces, ads and sales control.",
@@ -174,7 +171,6 @@ const translations = {
     proj3_title: "Marketplace content",
     proj3_text:
       "Book cards and visuals for AST on Wildberries — new title design and promo materials.",
-    footer_social: "SOCIAL",
     footer_contact: "CONTACT",
   },
 };
