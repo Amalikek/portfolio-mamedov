@@ -33,10 +33,10 @@ const translations = {
     gallery_title: "ГАЛЕРЕЯ РАБОТ",
     gallery_note: "Нажмите на проект — откроется галерея работ именно этой компании.",
     work_open: "Открыть галерею",
-    work_ast_tag: "Бренд · маркетплейсы · контент · видео",
+    work_ast_tag: "Бренд · маркетплейсы · контент",
     work_ast_title: "Издательство АСТ",
     work_ast_text:
-      "Карточки книг на Wildberries, визуалы и видео для продвижения новинок: УТП, оформление и рекламные материалы.",
+      "Карточки книг на Wildberries и визуалы для продвижения новинок: УТП, оформление и рекламные материалы.",
     work1_tag: "Брендинг · презентации · веб",
     work1_title: "TA Group",
     work1_text:
@@ -84,7 +84,7 @@ const translations = {
       "Кейсы АСТ, Виталити, TA Group, QI System и арт-салона — стратегия, дизайн, медиабаинг и контент в одной связке.",
     proj3_title: "Контент для маркетплейсов",
     proj3_text:
-      "Карточки книг, визуалы и видео для АСТ на Wildberries — оформление новинок и рекламные ролики.",
+      "Карточки книг и визуалы для АСТ на Wildberries — оформление новинок и рекламные материалы.",
     footer_social: "СОЦИАЛЬНЫЕ СЕТИ",
     footer_contact: "КОНТАКТЫ ДЛЯ СВЯЗИ",
   },
@@ -122,10 +122,10 @@ const translations = {
     gallery_title: "WORK GALLERY",
     gallery_note: "Click a project — it opens that company's gallery only.",
     work_open: "Open gallery",
-    work_ast_tag: "Brand · marketplaces · content · video",
+    work_ast_tag: "Brand · marketplaces · content",
     work_ast_title: "AST Publishing",
     work_ast_text:
-      "Book cards on Wildberries, visuals and videos for new titles: UVP, layout and promo materials.",
+      "Book cards on Wildberries and visuals for new titles: UVP, layout and promo materials.",
     work1_tag: "Branding · decks · web",
     work1_title: "TA Group",
     work1_text:
@@ -173,7 +173,7 @@ const translations = {
       "Cases for AST, Vitality, TA Group, QI System and the art salon — strategy, design, media buying and content together.",
     proj3_title: "Marketplace content",
     proj3_text:
-      "Book cards, visuals and videos for AST on Wildberries — new title design and promo clips.",
+      "Book cards and visuals for AST on Wildberries — new title design and promo materials.",
     footer_social: "SOCIAL",
     footer_contact: "CONTACT",
   },
@@ -196,17 +196,10 @@ const galleryTitles = {
   },
 };
 
-function isVideo(src) {
-  return /\.(mov|mp4|webm|m4v)$/i.test(src);
-}
-
 const galleries = {
   ast: [
     "assets/works/ast/ast-1.jpg",
     "assets/works/ast/ast-2.jpg",
-    "assets/videos/ast-1.mov",
-    "assets/videos/ast-2.mov",
-    "assets/videos/ast-3.mp4",
   ],
   ta: [
     "assets/works/ta-3.png",
@@ -246,7 +239,6 @@ const menuBtn = document.getElementById("menuBtn");
 const nav = document.querySelector(".nav");
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightboxImage");
-const lightboxVideo = document.getElementById("lightboxVideo");
 const lightboxCaption = document.getElementById("lightboxCaption");
 
 function applyLanguage(next) {
@@ -268,27 +260,9 @@ function updateCaption() {
   lightboxCaption.textContent = `${title} · ${currentIndex + 1}/${currentGallery.length}`;
 }
 
-function stopVideo() {
-  lightboxVideo.pause();
-  lightboxVideo.removeAttribute("src");
-  lightboxVideo.load();
-}
-
 function showMedia(src) {
-  if (isVideo(src)) {
-    lightboxImage.hidden = true;
-    lightboxImage.removeAttribute("src");
-    lightboxVideo.hidden = false;
-    lightboxVideo.setAttribute("playsinline", "");
-    lightboxVideo.setAttribute("webkit-playsinline", "");
-    lightboxVideo.src = src;
-    lightboxVideo.load();
-  } else {
-    stopVideo();
-    lightboxVideo.hidden = true;
-    lightboxImage.hidden = false;
-    lightboxImage.src = src;
-  }
+  lightboxImage.hidden = false;
+  lightboxImage.src = src;
 }
 
 function openLightbox(key, index = 0) {
@@ -305,11 +279,9 @@ function openLightbox(key, index = 0) {
 }
 
 function closeLightbox() {
-  stopVideo();
   lightbox.hidden = true;
   lightboxImage.src = "";
   lightboxImage.hidden = true;
-  lightboxVideo.hidden = true;
   lightboxCaption.textContent = "";
   document.body.style.overflow = "";
   document.body.style.position = "";
@@ -318,7 +290,6 @@ function closeLightbox() {
 
 function showSlide(step) {
   if (!currentGallery.length) return;
-  stopVideo();
   currentIndex =
     (currentIndex + step + currentGallery.length) % currentGallery.length;
   showMedia(currentGallery[currentIndex]);
@@ -383,7 +354,6 @@ function onTouchStart(e) {
 
 function onTouchEnd(e) {
   if (lightbox.hidden) return;
-  if (e.target && e.target.closest && e.target.closest("video")) return;
   const t = e.changedTouches[0];
   const dx = t.clientX - touchStartX;
   const dy = t.clientY - touchStartY;
