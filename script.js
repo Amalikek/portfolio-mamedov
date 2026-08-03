@@ -17,11 +17,8 @@ const i18n = {
   ru: {
     brand: "Гарягды",
     nav_works: "Работы",
-    nav_about: "О художнике",
     nav_contact: "Контакты",
     works_title: "Работы",
-    about_title: "О художнике",
-    about_text: "Живопись.",
     contact_title: "Контакты",
     contact_lead: "Связаться",
     socials_label: "Соцсети",
@@ -34,11 +31,8 @@ const i18n = {
   en: {
     brand: "Garyagdy",
     nav_works: "Works",
-    nav_about: "About",
     nav_contact: "Contact",
     works_title: "Works",
-    about_title: "About",
-    about_text: "Painting.",
     contact_title: "Contact",
     contact_lead: "Get in touch",
     socials_label: "Social",
@@ -51,11 +45,8 @@ const i18n = {
   az: {
     brand: "Qaryağdı",
     nav_works: "İşlər",
-    nav_about: "Haqqında",
     nav_contact: "Əlaqə",
     works_title: "İşlər",
-    about_title: "Haqqında",
-    about_text: "Rəssamlıq.",
     contact_title: "Əlaqə",
     contact_lead: "Əlaqə saxlayın",
     socials_label: "Sosial şəbəkələr",
@@ -195,7 +186,7 @@ nav?.querySelectorAll("a").forEach((link) => {
   });
 });
 
-const sections = ["works", "about", "contact"]
+const sections = ["works", "contact"]
   .map((id) => document.getElementById(id))
   .filter(Boolean);
 
