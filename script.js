@@ -1,6 +1,6 @@
 const works = [
-  { src: "assets/art/building.png", altKey: "work_building" },
-  { src: "assets/art/children.png", altKey: "work_children" },
+  { src: "assets/art/work-01.png", altKey: "work_building" },
+  { src: "assets/art/work-02.png", altKey: "work_children" },
   { src: "assets/art/work-03.png", altKey: "work_n" },
   { src: "assets/art/work-04.png", altKey: "work_n" },
   { src: "assets/art/work-05.png", altKey: "work_n" },
@@ -10,6 +10,7 @@ const works = [
   { src: "assets/art/work-09.png", altKey: "work_n" },
   { src: "assets/art/work-10.png", altKey: "work_n" },
   { src: "assets/art/work-11.png", altKey: "work_n" },
+  { src: "assets/art/work-12.png", altKey: "work_n" },
 ];
 
 const i18n = {
