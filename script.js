@@ -15,45 +15,45 @@ const works = [
 const i18n = {
   ru: {
     brand: "Гарягды",
-    nav_works: "Работы",
-    nav_contact: "Контакты",
-    works_title: "Работы",
-    contact_title: "Контакты",
-    contact_lead: "Связаться",
+    nav_portfolio: "Портфолио",
+    nav_author: "Гарягды",
+    portfolio_title: "Портфолио",
+    author_title: "Гарягды",
+    author_lead: "Художник",
     socials_label: "Соцсети",
     socials_soon: "скоро",
     work_building: "Здание",
     work_children: "С детьми",
     work_n: "Работа",
-    title: "Гарягды — художник",
+    title: "Гарягды — Портфолио",
   },
   en: {
     brand: "Garyagdy",
-    nav_works: "Works",
-    nav_contact: "Contact",
-    works_title: "Works",
-    contact_title: "Contact",
-    contact_lead: "Get in touch",
+    nav_portfolio: "Portfolio",
+    nav_author: "Garyagdy",
+    portfolio_title: "Portfolio",
+    author_title: "Garyagdy",
+    author_lead: "Artist",
     socials_label: "Social",
     socials_soon: "coming soon",
     work_building: "Building",
     work_children: "With children",
     work_n: "Work",
-    title: "Garyagdy — artist",
+    title: "Garyagdy — Portfolio",
   },
   az: {
     brand: "Qaryağdı",
-    nav_works: "İşlər",
-    nav_contact: "Əlaqə",
-    works_title: "İşlər",
-    contact_title: "Əlaqə",
-    contact_lead: "Əlaqə saxlayın",
+    nav_portfolio: "Portfolio",
+    nav_author: "Qaryağdı",
+    portfolio_title: "Portfolio",
+    author_title: "Qaryağdı",
+    author_lead: "Rəssam",
     socials_label: "Sosial şəbəkələr",
     socials_soon: "tezliklə",
     work_building: "Bina",
     work_children: "Uşaqlarla",
     work_n: "İş",
-    title: "Qaryağdı — rəssam",
+    title: "Qaryağdı — Portfolio",
   },
 };
 
@@ -189,7 +189,7 @@ nav?.querySelectorAll("a").forEach((link) => {
   });
 });
 
-const sections = ["works", "contact"]
+const sections = ["portfolio", "author"]
   .map((id) => document.getElementById(id))
   .filter(Boolean);
 
