@@ -3,80 +3,225 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="Гарягды — художник. Портфолио." />
-  <meta name="theme-color" content="#ffffff" />
-  <title>Гарягды — Портфолио</title>
-  <link rel="stylesheet" href="styles.css?v=20260803-1558" />
+  <meta name="description" content="Портфолио Мамедов — бренд-менеджер, дизайнер, маркетолог." />
+  <title>Портфолио Мамедов</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="#top" data-i18n="brand">Гарягды</a>
-    <nav class="nav" id="nav" aria-label="Main">
-      <a href="#portfolio" data-i18n="nav_portfolio">Портфолио</a>
-      <a href="#author" data-i18n="nav_author">Гарягды</a>
+  <header class="topbar">
+    <nav class="nav">
+      <a href="#about" data-i18n="nav_about">Обо мне</a>
+      <a href="#skills" data-i18n="nav_skills">Навыки</a>
+      <a href="#gallery" data-i18n="nav_gallery">Галерея работ</a>
+      <a href="#experience" data-i18n="nav_exp">Опыт</a>
+      <a href="#contact" data-i18n="nav_contact">Контакты</a>
     </nav>
-    <div class="header-actions">
-      <div class="lang-switch" role="group" aria-label="Language">
-        <button type="button" class="lang-btn is-active" data-lang="ru">RU</button>
-        <button type="button" class="lang-btn" data-lang="en">EN</button>
-        <button type="button" class="lang-btn" data-lang="az">AZ</button>
-      </div>
-      <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span>
-      </button>
+    <div class="topbar-right">
+      <button class="lang-btn" id="langToggle" type="button" aria-label="Language">RU / EN</button>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu">☰</button>
     </div>
   </header>
 
-  <main id="top">
+  <main>
     <section class="hero">
-      <button type="button" class="hero-frame" id="heroOpen" aria-label="Open">
-        <img src="assets/art/building.png" alt="" id="heroImg" />
-      </button>
+      <h1 class="hero-title" data-i18n="brand">Портфолио Мамедов</h1>
+      <p class="hero-sub" data-i18n="hero_role">бренд-менеджер / дизайнер / маркетолог</p>
     </section>
 
-    <section class="works" id="portfolio">
-      <h2 class="section-title" data-i18n="portfolio_title">Портфолио</h2>
-
-      <div class="slider" id="slider">
-        <button type="button" class="slider-arrow prev" id="slidePrev" aria-label="Previous">‹</button>
-        <div class="slider-stage" id="sliderStage">
-          <img id="slideImg" src="assets/art/work-02.png" alt="" />
+    <section class="block" id="about">
+      <h2 class="block-title"><span data-i18n="about_title">ОБО МНЕ</span> <span class="arrow" aria-hidden="true">↘</span></h2>
+      <div class="about-grid">
+        <div class="about-photo">
+          <img src="assets/photo/amal.png" alt="Мамедов Амаль" />
         </div>
-        <button type="button" class="slider-arrow next" id="slideNext" aria-label="Next">›</button>
+        <div class="about-copy">
+          <p class="about-lead" data-i18n="about_lead">
+            Привет! Меня зовут Амаль Мамедов, и я многопрофильный специалист в брендинге, маркетинге и дизайне.
+          </p>
+          <p class="about-meta">
+            <span data-i18n="about_age_label">Возраст:</span> 22<br />
+            <span data-i18n="about_edu_label">Образование:</span> <span data-i18n="about_edu">РЭУ им. Плеханова, реклама и связи с общественностью</span>
+          </p>
+          <ul class="spec-list">
+            <li data-i18n="spec_1">БРЕНД-МЕНЕДЖМЕНТ / ПОЗИЦИОНИРОВАНИЕ</li>
+            <li data-i18n="spec_2">МАРКЕТИНГ / МЕДИАБАИНГ</li>
+            <li data-i18n="spec_3">ДИЗАЙН / FIGMA / ADOBE</li>
+            <li data-i18n="spec_4">SMM / КОНТЕНТ / ВИДЕО</li>
+            <li data-i18n="spec_5">ВАЙБ-КОДИНГ / C# / ПРОДУКТЫ</li>
+          </ul>
+        </div>
       </div>
-
-      <p class="slider-count"><span id="slideCurrent">1</span> / <span id="slideTotal">11</span></p>
-
-      <div class="thumbs" id="thumbs" aria-label="Portfolio"></div>
     </section>
 
-    <section class="section contact" id="author">
-      <h2 class="section-title" data-i18n="author_title">Гарягды</h2>
-      <p class="contact-lead" data-i18n="author_lead">Художник</p>
-      <div class="contact-links">
-        <a href="tel:+79856279652">+7 (985) 627-96-52</a>
-        <a href="mailto:amal0@ya.ru">amal0@ya.ru</a>
+    <section class="block" id="skills">
+      <h2 class="block-title"><span data-i18n="skills_title">НАВЫКИ</span> <span class="arrow" aria-hidden="true">↘</span></h2>
+      <div class="skills-grid">
+        <div>
+          <h3 class="skills-label" data-i18n="skills_tools">РАБОТАЮ В:</h3>
+          <div class="tool-icons">
+            <div class="app-icon"><span class="app-badge app-ps">Ps</span><span class="app-name">Photoshop</span></div>
+            <div class="app-icon"><span class="app-badge app-ai">Ai</span><span class="app-name">Illustrator</span></div>
+            <div class="app-icon"><span class="app-badge app-lr">Lr</span><span class="app-name">Lightroom</span></div>
+            <div class="app-icon"><span class="app-badge app-figma">Fg</span><span class="app-name">Figma</span></div>
+            <div class="app-icon"><span class="app-badge app-davinci">Dv</span><span class="app-name">DaVinci</span></div>
+            <div class="app-icon"><span class="app-badge app-blender">Bl</span><span class="app-name">Blender</span></div>
+            <div class="app-icon"><span class="app-badge app-tilda">Td</span><span class="app-name">Tilda</span></div>
+            <div class="app-icon"><span class="app-badge app-bitrix">B24</span><span class="app-name">Битрикс24</span></div>
+            <div class="app-icon"><span class="app-badge app-metrica">М</span><span class="app-name">Метрика</span></div>
+            <div class="app-icon"><span class="app-badge app-csharp">C#</span><span class="app-name">CSharp</span></div>
+          </div>
+        </div>
+        <div>
+          <h3 class="skills-label" data-i18n="skills_base">БАЗОВЫЕ ЗНАНИЯ:</h3>
+          <ul class="base-list">
+            <li data-i18n="base_1">Бренд-менеджмент и позиционирование</li>
+            <li data-i18n="base_2">Продвижение и развитие бренда</li>
+            <li data-i18n="base_3">Маркетинговые и рыночные исследования</li>
+            <li data-i18n="base_4">Анализ ЦА, УТП, медиапланы</li>
+            <li data-i18n="base_5">Реклама, лидогенерация, Avito, таргет</li>
+            <li data-i18n="base_6">SMM, копирайтинг, контент</li>
+            <li data-i18n="base_7">Метрики охвата и вовлечённости</li>
+            <li data-i18n="base_8">Яндекс.Метрика · Битрикс24 · 1С</li>
+          </ul>
+        </div>
       </div>
-      <div class="socials">
-        <span class="socials-label" data-i18n="socials_label">Соцсети</span>
-        <p class="socials-soon" data-i18n="socials_soon">скоро</p>
+    </section>
+
+    <section class="block" id="gallery">
+      <h2 class="block-title"><span data-i18n="gallery_title">ГАЛЕРЕЯ РАБОТ</span> <span class="arrow" aria-hidden="true">↘</span></h2>
+      <p class="section-note" data-i18n="gallery_note">Нажмите на проект — откроется галерея работ именно этой компании.</p>
+
+      <div class="works-list">
+        <article class="work" data-gallery="ast">
+          <button class="work-visual" type="button" aria-label="АСТ">
+            <img src="assets/works/ast/ast-1.jpg" alt="Издательство АСТ" />
+          </button>
+          <div class="work-info">
+            <p class="work-tag" data-i18n="work_ast_tag">Бренд · маркетплейсы · контент</p>
+            <h3 data-i18n="work_ast_title">Издательство АСТ</h3>
+            <p data-i18n="work_ast_text">Карточки книг на Wildberries и визуалы для продвижения новинок: УТП, оформление и рекламные материалы.</p>
+            <button class="btn-open" type="button" data-i18n="work_open">Открыть галерею</button>
+          </div>
+        </article>
+
+        <article class="work work-reverse" data-gallery="ta">
+          <button class="work-visual" type="button" aria-label="TA Group">
+            <img src="assets/works/ta-3.png" alt="TA Group" />
+          </button>
+          <div class="work-info">
+            <p class="work-tag" data-i18n="work1_tag">Брендинг · презентации · веб</p>
+            <h3 data-i18n="work1_title">TA Group</h3>
+            <p data-i18n="work1_text">Фирменный стиль холдинга, карта терминалов, инфографика, макеты сайта и выставочный стенд.</p>
+            <button class="btn-open" type="button" data-i18n="work_open">Открыть галерею</button>
+          </div>
+        </article>
+
+        <article class="work" data-gallery="vitality">
+          <button class="work-visual" type="button" aria-label="Виталити">
+            <img src="assets/works/vitality-2.png" alt="Виталити" />
+          </button>
+          <div class="work-info">
+            <p class="work-tag" data-i18n="work2_tag">Маркетинг · медиабаинг · дизайн</p>
+            <h3 data-i18n="work2_title">Виталити</h3>
+            <p data-i18n="work2_text">Айдентика, баннеры, презентации услуг, витрина Avito и аналитика трафика.</p>
+            <button class="btn-open" type="button" data-i18n="work_open">Открыть галерею</button>
+          </div>
+        </article>
+
+        <article class="work work-reverse" data-gallery="art">
+          <button class="work-visual" type="button" aria-label="Художественный салон">
+            <img src="assets/works/art-1.png" alt="Художественный салон" />
+          </button>
+          <div class="work-info">
+            <p class="work-tag" data-i18n="work3_tag">SMM · контент · веб</p>
+            <h3 data-i18n="work3_title">Художественный салон</h3>
+            <p data-i18n="work3_text">Интерфейсы галереи, профили художников, контент для соцсетей и интервью.</p>
+            <button class="btn-open" type="button" data-i18n="work_open">Открыть галерею</button>
+          </div>
+        </article>
+
+        <article class="work" data-gallery="qis">
+          <button class="work-visual" type="button" aria-label="QI System">
+            <img src="assets/works/qis-3.png" alt="QI System" />
+          </button>
+          <div class="work-info">
+            <p class="work-tag" data-i18n="work4_tag">Дизайн · бренд-материалы</p>
+            <h3>QI System</h3>
+            <p data-i18n="work4_text">Презентации, прайс-листы, программа лояльности и визуальная система.</p>
+            <button class="btn-open" type="button" data-i18n="work_open">Открыть галерею</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="experience">
+      <h2 class="block-title"><span data-i18n="exp_title">ОПЫТ</span> <span class="arrow" aria-hidden="true">↘</span></h2>
+      <div class="exp-grid">
+        <article class="exp-col">
+          <div class="exp-item">
+            <p class="exp-role" data-i18n="job1_role">Младший бренд-менеджер — АСТ</p>
+            <p class="exp-time">06.2025 — 05.2026</p>
+            <p data-i18n="job1_text">Полный цикл продвижения новых книг: ЦА, УТП, медиапланы в 1С, подрядчики, контент для сайта и маркетплейсов, реклама и контроль продаж.</p>
+            <ul>
+              <li data-i18n="job1_r1">20 планов запуска книг — старт вовремя</li>
+              <li data-i18n="job1_r2">3000 карточек товаров в Figma с УТП</li>
+              <li data-i18n="job1_r3">10 рекламных кампаний · 9 презентаций · 5 мероприятий</li>
+            </ul>
+          </div>
+          <div class="exp-item">
+            <p class="exp-role" data-i18n="job2_role">Маркетолог / медиабайер — Виталити</p>
+            <p class="exp-time">05.2023 — 10.2024</p>
+            <p data-i18n="job2_text">Лидогенерация (Avito, SEO, соцсети), УТП, имидж-материалы, аналитика в Битрикс24.</p>
+            <ul>
+              <li data-i18n="job2_r1">Конверсия сайта 15%</li>
+              <li data-i18n="job2_r2">2000 объявлений Avito · база 1500 контактов</li>
+            </ul>
+          </div>
+        </article>
+        <article class="exp-col">
+          <h3 data-i18n="exp_more">ДОПОЛНИТЕЛЬНЫЙ ОПЫТ РАБОТЫ</h3>
+          <div class="exp-item">
+            <p class="exp-role" data-i18n="job3_role">SMM-менеджер · руководитель группы — Худ. салон</p>
+            <p class="exp-time">01.2023 — 09.2024</p>
+            <p data-i18n="job3_text">Соцсети, контент-план, интервью с художниками, SEO/юзабилити, мероприятия и стенды.</p>
+          </div>
+          <div class="exp-item">
+            <p class="exp-role" data-i18n="job4_role">Маркетолог / дизайнер — QI System</p>
+            <p class="exp-time" data-i18n="job4_time">Проект · 2 месяца</p>
+            <p data-i18n="job4_text">Презентации, прайсы, визитки, сайт и аналитика лидов.</p>
+          </div>
+          <div class="exp-item">
+            <p class="exp-role" data-i18n="skills_block_title">НАВЫКИ И ЧТО ДЕЛАЛ</p>
+            <p data-i18n="skills_block_text">Стратегии продвижения брендов, аккаунтинг, запуск книг и рекламных кампаний, медиапланы, карточки товаров и презентации, работа с авторами и подрядчиками, SMM и контент, лидогенерация, Avito, аналитика продаж и трафика, организация мероприятий, дизайн рекламных материалов, фотография, нейросети, вайб-кодинг и базовый C#. Soft skills: аналитика, многозадачность, креатив, переговоры, ориентация на результат.</p>
+          </div>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© <span id="year"></span> <span data-i18n="brand">Гарягды</span></p>
+  <footer class="footer" id="contact">
+    <div class="footer-col">
+      <h3 data-i18n="footer_contact">КОНТАКТЫ ДЛЯ СВЯЗИ</h3>
+      <a href="tel:+79856279652">+7 (985) 627-96-52</a>
+      <a href="mailto:mamedovamal@yandex.ru">mamedovamal@yandex.ru</a>
+    </div>
+    <div class="footer-col footer-copy">
+      <p>© All rights reserved<br /><span data-i18n="brand">Портфолио Мамедов</span> <span id="year"></span></p>
+    </div>
   </footer>
 
   <div class="lightbox" id="lightbox" hidden>
-    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
-    <button type="button" class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous">‹</button>
-    <figure class="lightbox-figure">
-      <img id="lightboxImg" src="" alt="" />
-    </figure>
-    <button type="button" class="lightbox-nav next" id="lightboxNext" aria-label="Next">›</button>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close">×</button>
+    <div class="lightbox-stage">
+      <button class="lightbox-nav prev" id="lightboxPrev" type="button" aria-label="Previous">‹</button>
+      <div class="lightbox-media" id="lightboxMedia">
+        <img id="lightboxImage" alt="" hidden draggable="false" />
+      </div>
+      <button class="lightbox-nav next" id="lightboxNext" type="button" aria-label="Next">›</button>
+    </div>
+    <p class="lightbox-caption" id="lightboxCaption"></p>
   </div>
 
-  <script src="script.js?v=20260803-1558"></script>
+  <script src="script.js"></script>
 </body>
 </html>
