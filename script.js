@@ -1,5 +1,4 @@
 const works = [
-  { src: "assets/art/work-01.png", altKey: "work_building" },
   { src: "assets/art/work-02.png", altKey: "work_children" },
   { src: "assets/art/work-03.png", altKey: "work_n" },
   { src: "assets/art/work-04.png", altKey: "work_n" },
