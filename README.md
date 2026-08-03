@@ -1,6 +1,8 @@
 # Портфолио Мамедов
 
-Онлайн: **https://amalikek.github.io/portfolio-mamedov/**
+Онлайн: **https://garyagdy1.github.io/portfolio-mamedov/**
+
+Репозиторий: **https://github.com/Garyagdy1/portfolio-mamedov**
 
 Статический сайт. Бесплатно, без домена.
 
