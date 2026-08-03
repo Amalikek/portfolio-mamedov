@@ -1,12 +1,20 @@
 const works = [
-  { src: "assets/art/work-01.png", altKey: "work_1_alt" },
-  { src: "assets/art/work-02.png", altKey: "work_2_alt" },
+  { src: "assets/art/building.png", altKey: "work_building" },
+  { src: "assets/art/children.png", altKey: "work_children" },
+  { src: "assets/art/work-03.png", altKey: "work_n" },
+  { src: "assets/art/work-04.png", altKey: "work_n" },
+  { src: "assets/art/work-05.png", altKey: "work_n" },
+  { src: "assets/art/work-06.png", altKey: "work_n" },
+  { src: "assets/art/work-07.png", altKey: "work_n" },
+  { src: "assets/art/work-08.png", altKey: "work_n" },
+  { src: "assets/art/work-09.png", altKey: "work_n" },
+  { src: "assets/art/work-10.png", altKey: "work_n" },
+  { src: "assets/art/work-11.png", altKey: "work_n" },
 ];
 
 const i18n = {
   ru: {
     brand: "Гарягды",
-    hero_role: "художник",
     nav_works: "Работы",
     nav_about: "О художнике",
     nav_contact: "Контакты",
@@ -17,13 +25,13 @@ const i18n = {
     contact_lead: "Связаться",
     socials_label: "Соцсети",
     socials_soon: "скоро",
-    work_1_alt: "Работа 1",
-    work_2_alt: "Работа 2",
+    work_building: "Здание",
+    work_children: "С детьми",
+    work_n: "Работа",
     title: "Гарягды — художник",
   },
   en: {
     brand: "Garyagdy",
-    hero_role: "artist",
     nav_works: "Works",
     nav_about: "About",
     nav_contact: "Contact",
@@ -34,13 +42,13 @@ const i18n = {
     contact_lead: "Get in touch",
     socials_label: "Social",
     socials_soon: "coming soon",
-    work_1_alt: "Work 1",
-    work_2_alt: "Work 2",
+    work_building: "Building",
+    work_children: "With children",
+    work_n: "Work",
     title: "Garyagdy — artist",
   },
   az: {
     brand: "Qaryağdı",
-    hero_role: "rəssam",
     nav_works: "İşlər",
     nav_about: "Haqqında",
     nav_contact: "Əlaqə",
@@ -51,8 +59,9 @@ const i18n = {
     contact_lead: "Əlaqə saxlayın",
     socials_label: "Sosial şəbəkələr",
     socials_soon: "tezliklə",
-    work_1_alt: "İş 1",
-    work_2_alt: "İş 2",
+    work_building: "Bina",
+    work_children: "Uşaqlarla",
+    work_n: "İş",
     title: "Qaryağdı — rəssam",
   },
 };
@@ -60,9 +69,14 @@ const i18n = {
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-/* Language */
 let lang = localStorage.getItem("garyagdy-lang") || "ru";
 if (!i18n[lang]) lang = "ru";
+
+function altFor(work, index) {
+  const t = i18n[lang];
+  if (work.altKey === "work_n") return `${t.work_n} ${index + 1}`;
+  return t[work.altKey] || t.work_n;
+}
 
 function applyLang(next) {
   lang = next;
@@ -75,9 +89,11 @@ function applyLang(next) {
     if (i18n[lang][key] != null) el.textContent = i18n[lang][key];
   });
 
-  document.querySelectorAll("[data-i18n-alt]").forEach((el) => {
-    const key = el.getAttribute("data-i18n-alt");
-    if (i18n[lang][key] != null) el.setAttribute("alt", i18n[lang][key]);
+  const heroImg = document.getElementById("heroImg");
+  if (heroImg) heroImg.alt = altFor(works[0], 0);
+
+  document.querySelectorAll("#gallery img").forEach((img, i) => {
+    img.alt = altFor(works[i], i);
   });
 
   document.querySelectorAll(".lang-btn").forEach((btn) => {
@@ -88,6 +104,25 @@ function applyLang(next) {
 document.querySelectorAll(".lang-btn").forEach((btn) => {
   btn.addEventListener("click", () => applyLang(btn.dataset.lang));
 });
+
+/* Build gallery */
+const gallery = document.getElementById("gallery");
+works.forEach((work, index) => {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "gallery-item";
+  btn.dataset.index = String(index);
+  btn.style.animationDelay = `${0.04 + index * 0.05}s`;
+  const img = document.createElement("img");
+  img.src = work.src;
+  img.loading = "lazy";
+  img.alt = "";
+  btn.appendChild(img);
+  btn.addEventListener("click", () => openLightbox(index));
+  gallery.appendChild(btn);
+});
+
+document.querySelector(".hero-frame")?.addEventListener("click", () => openLightbox(0));
 
 applyLang(lang);
 
@@ -107,17 +142,7 @@ nav?.querySelectorAll("a").forEach((link) => {
   });
 });
 
-/* Header scroll */
-const header = document.querySelector(".site-header");
-window.addEventListener(
-  "scroll",
-  () => {
-    header?.classList.toggle("is-scrolled", window.scrollY > 8);
-  },
-  { passive: true }
-);
-
-/* Active nav on scroll */
+/* Active nav */
 const sections = ["works", "about", "contact"]
   .map((id) => document.getElementById(id))
   .filter(Boolean);
@@ -129,8 +154,7 @@ function updateActiveNav() {
     if (sec.offsetTop <= y) current = sec.id;
   });
   document.querySelectorAll(".nav a").forEach((a) => {
-    const href = a.getAttribute("href") || "";
-    a.classList.toggle("is-active", href === `#${current}`);
+    a.classList.toggle("is-active", a.getAttribute("href") === `#${current}`);
   });
 }
 
@@ -146,7 +170,7 @@ function openLightbox(index) {
   currentIndex = (index + works.length) % works.length;
   const work = works[currentIndex];
   lightboxImg.src = work.src;
-  lightboxImg.alt = i18n[lang][work.altKey] || "";
+  lightboxImg.alt = altFor(work, currentIndex);
   lightbox.hidden = false;
   document.body.style.overflow = "hidden";
 }
@@ -160,12 +184,6 @@ function closeLightbox() {
 function showNext(delta) {
   openLightbox(currentIndex + delta);
 }
-
-document.querySelectorAll("[data-index]").forEach((el) => {
-  el.addEventListener("click", () => {
-    openLightbox(Number(el.dataset.index));
-  });
-});
 
 document.getElementById("lightboxClose")?.addEventListener("click", closeLightbox);
 document.getElementById("lightboxPrev")?.addEventListener("click", () => showNext(-1));
@@ -182,7 +200,6 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") showNext(1);
 });
 
-/* Touch swipe in lightbox */
 let touchX = null;
 lightbox?.addEventListener(
   "touchstart",
