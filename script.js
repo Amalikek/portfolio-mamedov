@@ -160,9 +160,13 @@ document.getElementById("slideNext")?.addEventListener("click", () => step(1));
 
 slideStage?.addEventListener("click", () => openLightbox(slideIndex));
 document.getElementById("heroOpen")?.addEventListener("click", () => {
-  goTo(0);
-  openLightbox(0);
+  openHeroLightbox();
 });
+
+/* Always start at the top when the page opens */
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+window.scrollTo(0, 0);
+window.addEventListener("load", () => window.scrollTo(0, 0));
 
 /* Swipe on slider */
 bindSwipe(document.getElementById("slider"), (dir) => step(dir));
@@ -207,8 +211,10 @@ updateActiveNav();
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
 let lightboxIndex = 0;
+let lightboxMode = "works"; // "works" | "hero"
 
 function openLightbox(index) {
+  lightboxMode = "works";
   lightboxIndex = (index + works.length) % works.length;
   const work = works[lightboxIndex];
   lightboxImg.src = work.src;
@@ -218,13 +224,26 @@ function openLightbox(index) {
   goTo(lightboxIndex);
 }
 
+function openHeroLightbox() {
+  lightboxMode = "hero";
+  lightboxImg.src = "assets/art/building.png";
+  lightboxImg.alt = i18n[lang].work_building || "";
+  lightbox.hidden = false;
+  document.body.style.overflow = "hidden";
+}
+
 function closeLightbox() {
   lightbox.hidden = true;
   document.body.style.overflow = "";
   lightboxImg.src = "";
+  lightboxMode = "works";
 }
 
 function lightboxStep(delta) {
+  if (lightboxMode === "hero") {
+    openLightbox(delta > 0 ? 0 : works.length - 1);
+    return;
+  }
   openLightbox(lightboxIndex + delta);
 }
 
