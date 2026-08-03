@@ -72,6 +72,8 @@ if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 let lang = localStorage.getItem("garyagdy-lang") || "ru";
 if (!i18n[lang]) lang = "ru";
 
+let slideIndex = 0;
+
 function altFor(work, index) {
   const t = i18n[lang];
   if (work.altKey === "work_n") return `${t.work_n} ${index + 1}`;
@@ -89,40 +91,90 @@ function applyLang(next) {
     if (i18n[lang][key] != null) el.textContent = i18n[lang][key];
   });
 
-  const heroImg = document.getElementById("heroImg");
-  if (heroImg) heroImg.alt = altFor(works[0], 0);
-
-  document.querySelectorAll("#gallery img").forEach((img, i) => {
-    img.alt = altFor(works[i], i);
-  });
-
   document.querySelectorAll(".lang-btn").forEach((btn) => {
     btn.classList.toggle("is-active", btn.dataset.lang === lang);
   });
+
+  renderSlide(slideIndex, false);
 }
 
 document.querySelectorAll(".lang-btn").forEach((btn) => {
   btn.addEventListener("click", () => applyLang(btn.dataset.lang));
 });
 
-/* Build gallery */
-const gallery = document.getElementById("gallery");
+/* ——— Slider ——— */
+const slideImg = document.getElementById("slideImg");
+const slideStage = document.getElementById("sliderStage");
+const slideCurrent = document.getElementById("slideCurrent");
+const slideTotal = document.getElementById("slideTotal");
+const thumbs = document.getElementById("thumbs");
+const heroImg = document.getElementById("heroImg");
+
+slideTotal.textContent = String(works.length);
+
 works.forEach((work, index) => {
   const btn = document.createElement("button");
   btn.type = "button";
-  btn.className = "gallery-item";
+  btn.className = "thumb";
   btn.dataset.index = String(index);
-  btn.style.animationDelay = `${0.04 + index * 0.05}s`;
+  btn.setAttribute("aria-label", `Work ${index + 1}`);
   const img = document.createElement("img");
   img.src = work.src;
-  img.loading = "lazy";
   img.alt = "";
+  img.loading = "lazy";
   btn.appendChild(img);
-  btn.addEventListener("click", () => openLightbox(index));
-  gallery.appendChild(btn);
+  btn.addEventListener("click", () => goTo(index));
+  thumbs.appendChild(btn);
 });
 
-document.querySelector(".hero-frame")?.addEventListener("click", () => openLightbox(0));
+function renderSlide(index, animate = true) {
+  slideIndex = (index + works.length) % works.length;
+  const work = works[slideIndex];
+
+  if (animate) slideStage.classList.add("is-fading");
+
+  const apply = () => {
+    slideImg.src = work.src;
+    slideImg.alt = altFor(work, slideIndex);
+    slideCurrent.textContent = String(slideIndex + 1);
+    slideStage.classList.remove("is-fading");
+
+    document.querySelectorAll(".thumb").forEach((el, i) => {
+      el.classList.toggle("is-active", i === slideIndex);
+    });
+
+    const activeThumb = thumbs.querySelector(".thumb.is-active");
+    activeThumb?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  };
+
+  if (animate) {
+    window.setTimeout(apply, 120);
+  } else {
+    apply();
+  }
+
+  if (heroImg) heroImg.alt = altFor(works[0], 0);
+}
+
+function goTo(index) {
+  renderSlide(index, true);
+}
+
+function step(delta) {
+  goTo(slideIndex + delta);
+}
+
+document.getElementById("slidePrev")?.addEventListener("click", () => step(-1));
+document.getElementById("slideNext")?.addEventListener("click", () => step(1));
+
+slideStage?.addEventListener("click", () => openLightbox(slideIndex));
+document.getElementById("heroOpen")?.addEventListener("click", () => {
+  goTo(0);
+  openLightbox(0);
+});
+
+/* Swipe on slider */
+bindSwipe(document.getElementById("slider"), (dir) => step(dir));
 
 applyLang(lang);
 
@@ -142,7 +194,6 @@ nav?.querySelectorAll("a").forEach((link) => {
   });
 });
 
-/* Active nav */
 const sections = ["works", "about", "contact"]
   .map((id) => document.getElementById(id))
   .filter(Boolean);
@@ -164,15 +215,16 @@ updateActiveNav();
 /* Lightbox */
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
-let currentIndex = 0;
+let lightboxIndex = 0;
 
 function openLightbox(index) {
-  currentIndex = (index + works.length) % works.length;
-  const work = works[currentIndex];
+  lightboxIndex = (index + works.length) % works.length;
+  const work = works[lightboxIndex];
   lightboxImg.src = work.src;
-  lightboxImg.alt = altFor(work, currentIndex);
+  lightboxImg.alt = altFor(work, lightboxIndex);
   lightbox.hidden = false;
   document.body.style.overflow = "hidden";
+  goTo(lightboxIndex);
 }
 
 function closeLightbox() {
@@ -181,40 +233,59 @@ function closeLightbox() {
   lightboxImg.src = "";
 }
 
-function showNext(delta) {
-  openLightbox(currentIndex + delta);
+function lightboxStep(delta) {
+  openLightbox(lightboxIndex + delta);
 }
 
 document.getElementById("lightboxClose")?.addEventListener("click", closeLightbox);
-document.getElementById("lightboxPrev")?.addEventListener("click", () => showNext(-1));
-document.getElementById("lightboxNext")?.addEventListener("click", () => showNext(1));
+document.getElementById("lightboxPrev")?.addEventListener("click", () => lightboxStep(-1));
+document.getElementById("lightboxNext")?.addEventListener("click", () => lightboxStep(1));
 
 lightbox?.addEventListener("click", (e) => {
   if (e.target === lightbox) closeLightbox();
 });
 
 document.addEventListener("keydown", (e) => {
-  if (lightbox.hidden) return;
-  if (e.key === "Escape") closeLightbox();
-  if (e.key === "ArrowLeft") showNext(-1);
-  if (e.key === "ArrowRight") showNext(1);
+  if (!lightbox.hidden) {
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") lightboxStep(-1);
+    if (e.key === "ArrowRight") lightboxStep(1);
+    return;
+  }
+  if (e.key === "ArrowLeft") step(-1);
+  if (e.key === "ArrowRight") step(1);
 });
 
-let touchX = null;
-lightbox?.addEventListener(
-  "touchstart",
-  (e) => {
-    touchX = e.changedTouches[0].screenX;
-  },
-  { passive: true }
-);
-lightbox?.addEventListener(
-  "touchend",
-  (e) => {
-    if (touchX == null) return;
-    const dx = e.changedTouches[0].screenX - touchX;
-    if (Math.abs(dx) > 50) showNext(dx < 0 ? 1 : -1);
-    touchX = null;
-  },
-  { passive: true }
-);
+bindSwipe(lightbox, (dir) => {
+  if (!lightbox.hidden) lightboxStep(dir);
+});
+
+function bindSwipe(el, onSwipe) {
+  if (!el) return;
+  let x0 = null;
+  let y0 = null;
+
+  el.addEventListener(
+    "touchstart",
+    (e) => {
+      x0 = e.changedTouches[0].screenX;
+      y0 = e.changedTouches[0].screenY;
+    },
+    { passive: true }
+  );
+
+  el.addEventListener(
+    "touchend",
+    (e) => {
+      if (x0 == null) return;
+      const dx = e.changedTouches[0].screenX - x0;
+      const dy = e.changedTouches[0].screenY - y0;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+        onSwipe(dx < 0 ? 1 : -1);
+      }
+      x0 = null;
+      y0 = null;
+    },
+    { passive: true }
+  );
+}

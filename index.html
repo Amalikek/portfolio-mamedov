@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="Гарягды — художник. Живопись." />
+  <meta name="theme-color" content="#ffffff" />
   <title>Гарягды</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -29,14 +30,25 @@
 
   <main id="top">
     <section class="hero">
-      <button type="button" class="hero-frame" data-index="0" aria-label="Open work">
+      <button type="button" class="hero-frame" id="heroOpen" aria-label="Open">
         <img src="assets/art/building.png" alt="" id="heroImg" />
       </button>
     </section>
 
-    <section class="section works" id="works">
+    <section class="works" id="works">
       <h2 class="section-title" data-i18n="works_title">Работы</h2>
-      <div class="gallery" id="gallery"></div>
+
+      <div class="slider" id="slider">
+        <button type="button" class="slider-arrow prev" id="slidePrev" aria-label="Previous">‹</button>
+        <div class="slider-stage" id="sliderStage">
+          <img id="slideImg" src="assets/art/building.png" alt="" />
+        </div>
+        <button type="button" class="slider-arrow next" id="slideNext" aria-label="Next">›</button>
+      </div>
+
+      <p class="slider-count"><span id="slideCurrent">1</span> / <span id="slideTotal">1</span></p>
+
+      <div class="thumbs" id="thumbs" aria-label="Works"></div>
     </section>
 
     <section class="section about" id="about">
