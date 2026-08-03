@@ -6,7 +6,6 @@ const translations = {
     nav_gallery: "Галерея работ",
     nav_exp: "Опыт",
     nav_contact: "Контакты",
-    nav_projects: "Практические работы",
     hero_role: "бренд-менеджер / дизайнер / маркетолог",
     about_title: "ОБО МНЕ",
     about_lead:
@@ -74,16 +73,6 @@ const translations = {
     skills_block_title: "НАВЫКИ И ЧТО ДЕЛАЛ",
     skills_block_text:
       "Стратегии продвижения брендов, аккаунтинг, запуск книг и рекламных кампаний, медиапланы, карточки товаров и презентации, работа с авторами и подрядчиками, SMM и контент, лидогенерация, Avito, аналитика продаж и трафика, организация мероприятий, дизайн рекламных материалов, нейросети, вайб-кодинг и базовый C#. Soft skills: аналитика, многозадачность, креатив, переговоры, ориентация на результат.",
-    projects_title: "ПРАКТИЧЕСКИЕ РАБОТЫ",
-    proj1_title: "Сайт / приложение знакомств",
-    proj1_text:
-      "Собственный продукт: концепция и разработка сервиса знакомств. Собираю интерфейс и логику через вайб-кодинг, с базовым C#.",
-    proj2_title: "Бренд-материалы и запуски",
-    proj2_text:
-      "Кейсы АСТ, Виталити, TA Group, QI System и арт-салона — стратегия, дизайн, медиабаинг и контент в одной связке.",
-    proj3_title: "Контент для маркетплейсов",
-    proj3_text:
-      "Карточки книг и визуалы для АСТ на Wildberries — оформление новинок и рекламные материалы.",
     footer_contact: "КОНТАКТЫ ДЛЯ СВЯЗИ",
   },
   en: {
@@ -93,7 +82,6 @@ const translations = {
     nav_gallery: "Work gallery",
     nav_exp: "Experience",
     nav_contact: "Contacts",
-    nav_projects: "Practical work",
     hero_role: "brand manager / designer / marketer",
     about_title: "ABOUT ME",
     about_lead:
@@ -161,16 +149,6 @@ const translations = {
     skills_block_title: "SKILLS & WHAT I DID",
     skills_block_text:
       "Brand promotion strategies, account work, book and campaign launches, media plans, product cards and decks, work with authors and vendors, SMM and content, lead gen, Avito, sales and traffic analytics, event organization, ad design, AI tools, vibe coding and basic C#. Soft skills: analytics, multitasking, creativity, negotiation, results-driven.",
-    projects_title: "PRACTICAL WORK",
-    proj1_title: "Dating site / app",
-    proj1_text:
-      "Own product: concept and development of a dating service. Building UI and logic with vibe coding and basic C#.",
-    proj2_title: "Brand materials & launches",
-    proj2_text:
-      "Cases for AST, Vitality, TA Group, QI System and the art salon — strategy, design, media buying and content together.",
-    proj3_title: "Marketplace content",
-    proj3_text:
-      "Book cards and visuals for AST on Wildberries — new title design and promo materials.",
     footer_contact: "CONTACT",
   },
 };

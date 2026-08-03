@@ -468,30 +468,6 @@ button {
   margin-top: 0.25rem;
 }
 
-.projects-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
-}
-
-.project {
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 1.2rem;
-  box-shadow: var(--shadow);
-}
-
-.project h3 {
-  margin: 0 0 0.6rem;
-  font-size: 1.05rem;
-}
-
-.project p {
-  margin: 0;
-  color: var(--muted);
-}
-
 .footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -641,7 +617,6 @@ button {
   .work-reverse,
   .skills-grid,
   .exp-grid,
-  .projects-list,
   .footer {
     grid-template-columns: 1fr;
   }
